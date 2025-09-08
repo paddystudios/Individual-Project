@@ -50,7 +50,7 @@ export default function AlbumsGrid() {
       style={{
         display: "grid",
         gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-        gap: "1.25rem",
+        gap: "0.2rem",
         width: "100%",
       }}
     >
@@ -106,7 +106,7 @@ export default function AlbumsGrid() {
                   overflow: "hidden",
                 }}
               >
-            <p style={{ margin: 0, color: "#cfcfcf", lineHeight: 1.25, fontSize: "0.85rem" }}>
+            <p style={{ margin: 0, color: "#cfcfcf", lineHeight: 1.15, fontSize: "0.85rem" }}>
                   Lorem ipsum dolor sit amet consectetur. Id volutpat ac tristique auctor eget eu lectus quis orci. Ut netus
                   venenatis fames mauris. Sit ultrices dictumst elit tellus sed. Tristique eget nunc tellus quisque mauris
                   dignissim. Amet faucibus posuere sed tristique id pharetra at. Nisi in volutpat dignissim fermentum massa.
@@ -133,10 +133,10 @@ export default function AlbumsGrid() {
                     alignItems: "center",
                     justifyContent: "center",
                     gap: "0.5rem",
-                    width: "90px",
-                    height: "44px",
+                    width: "70px",
+                    height: "34px",
                     borderRadius: "24px",
-                    border: "2px solid #fff",
+                    border: "1px solid #fff",
                     textDecoration: "none",
                     color: "#fff",
                     fontSize: "1.5rem",
