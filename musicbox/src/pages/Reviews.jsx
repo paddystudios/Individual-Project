@@ -1,3 +1,3 @@
 export default function Reviews() {
-    return <h1 className="text-2xl font-bold">Reviews</h1>;
+    return <h1>Reviews Page</h1>;
   }
