@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
+import Logo from "./assets/BOPPDLOGO.svg";
 
 function Reviews() {
   return <h2 style={{ padding: "2rem" }}> Reviews Page</h2>;
@@ -18,17 +19,21 @@ function App() {
     <Router>
       <header
         style={{
-          padding: "1rem",
-          background: "#111",
-          borderBottom: "1px solid #333",
+          padding: "0.5rem",
+          margin: "0.5rem",
+          border: "1px solid white",
+          borderRadius: "14px",
         }}
       >
-        <nav style={{ display: "flex", gap: "2rem" }}>
-          <Link to="/">Home</Link>
-          <Link to="/reviews">Reviews</Link>
-          <Link to="/playlists">Playlists</Link>
-          <Link to="/profile">Profile</Link>
-        </nav>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "1.2rem"}}>
+          <img src={Logo} alt="BOPPD Logo" style={{ height: "35px" }} />
+          <nav style={{ display: "flex", gap: "2rem", fontFamily: "Roboto, sans-serif", fontWeight: 700 }}>
+            <Link to="/" style={{ fontWeight: 700, textTransform: "uppercase" }}>Home</Link>
+            <Link to="/reviews" style={{ fontWeight: 700, textTransform: "uppercase"}}>Reviews</Link>
+            <Link to="/playlists" style={{ fontWeight: 700, textTransform: "uppercase" }}>Playlists</Link>
+            <Link to="/profile" style={{ fontWeight: 700, textTransform: "uppercase" }}>Profile</Link>
+          </nav>
+        </div>
       </header>
 
       <Routes>
