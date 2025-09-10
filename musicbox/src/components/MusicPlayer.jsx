@@ -103,10 +103,7 @@ export default function MusicPlayer() {
       style={{
         flex: 1,
         padding: "1.25rem",
-        border: "0.5px solid rgba(255,255,255,0.4)",
-        borderRadius: 12,
         color: "white",
-        background: "#0a0a0a",
       }}
     >
       <h1 style={{ fontSize: 30, fontWeight: 400, marginBottom: 20 }}>New Music</h1>

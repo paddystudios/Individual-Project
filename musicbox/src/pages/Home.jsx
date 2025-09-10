@@ -8,7 +8,13 @@ import MusicPlayer from "../components/MusicPlayer";
 
 export default function Home() {
   return (
-    <div style={{ width: "100%", padding: "2rem" }}>
+    <div style={{ 
+      width: "100%", 
+      padding: "2rem", 
+      marginLeft: "auto", 
+      marginRight: "auto", 
+      maxWidth: "1400px" 
+    }}>
       <h2 style={{ marginBottom: "0.2rem" }}> NEW FROM FRIENDS</h2>
       <AlbumsGrid />
       <PopularSection />

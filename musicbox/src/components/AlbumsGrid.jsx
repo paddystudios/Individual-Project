@@ -10,8 +10,8 @@ const albumQueries = [
 
 // Hard-coded mock metadata to match UI (rating + fake usernames)
 const MOCK_META = [
-  { user: "@dalila_", rating: 3 },
-  { user: "@Drizzynxtdoor", rating: 5 },
+  { user: "@dalila_", rating: 5 },
+  { user: "@Drizzynxtdoor", rating: 3 },
   { user: "@f4ncydat", rating: 5 },
   { user: "@solanaa", rating: 4 },
 ];
@@ -50,7 +50,7 @@ export default function AlbumsGrid() {
       style={{
         display: "grid",
         gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-        gap: "0.2rem",
+        gap: "1rem",
         width: "100%",
       }}
     >
@@ -98,7 +98,7 @@ export default function AlbumsGrid() {
                 paddingTop: "0.25rem",
               }}
             >
-              <p style={{ margin: 0, fontSize: "1rem" }}>Review</p>
+              <p style={{ margin: 0, fontSize: "1.2em", fontWeight: "bold" }}>Review</p>
               <div
                 style={{
                   position: "relative",
@@ -106,7 +106,7 @@ export default function AlbumsGrid() {
                   overflow: "hidden",
                 }}
               >
-            <p style={{ margin: 0, color: "#cfcfcf", lineHeight: 1.15, fontSize: "0.85rem" }}>
+            <p style={{ margin: 0, color: "#cfcfcf", lineHeight: 1.25, fontSize: "1.1rem" }}>
                   Lorem ipsum dolor sit amet consectetur. Id volutpat ac tristique auctor eget eu lectus quis orci. Ut netus
                   venenatis fames mauris. Sit ultrices dictumst elit tellus sed. Tristique eget nunc tellus quisque mauris
                   dignissim. Amet faucibus posuere sed tristique id pharetra at. Nisi in volutpat dignissim fermentum massa.

@@ -1,10 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
+import Reviews from "./pages/Reviews"; // ⬅️ import the page
 import Logo from "./assets/BOPPDLOGO.svg";
-
-function Reviews() {
-  return <h2 style={{ padding: "2rem" }}> Reviews Page</h2>;
-}
 
 function Playlists() {
   return <h2 style={{ padding: "2rem" }}>Playlists Page</h2>;
@@ -38,10 +35,26 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/reviews" element={<Reviews />} />
+        <Route path="/reviews" element={<Reviews />} /> {/* ⬅️ uses the page */}
         <Route path="/playlists" element={<Playlists />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
+
+      <footer
+        style={{
+          padding: "2rem",
+          backgroundColor: "black",
+          color: "white",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          borderBottom: "10px solid yellow",
+        }}
+      >
+        <img src={Logo} alt="BOPPD Logo" style={{ height: "35px" }} />
+        <p>BOPPD Share your taste</p>
+        <p>By Paddy Studios</p>
+      </footer>
     </Router>
   );
 }
