@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { fetchAlbum } from "../lib/spotify";
+import buttonImg from "../assets/button.png";
 
 const albumQueries = [
   { q: "album:Full Moon artist:Brandy" },
   { q: "album:Certified Lover Boy artist:Drake" },
   { q: "album:Heaven Knows artist:PinkPantheress" },
   { q: "album:SOS artist:SZA" },
+  { q: "album:Timeless artist:Kaytranada" },
 ];
 
 // Hard-coded mock metadata to match UI (rating + fake usernames)
@@ -14,6 +16,7 @@ const MOCK_META = [
   { user: "@Drizzynxtdoor", rating: 3 },
   { user: "@f4ncydat", rating: 5 },
   { user: "@solanaa", rating: 4 },
+  { user: "@kayfan", rating: 5 },
 ];
 
 function Stars({ value = 5 }) {
@@ -49,7 +52,7 @@ export default function AlbumsGrid() {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+        gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
         gap: "1rem",
         width: "100%",
       }}
@@ -85,7 +88,7 @@ export default function AlbumsGrid() {
             </div>
 
             {/* Rating + username */}
-            <div style={{ marginTop: "0.75rem", display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
+            <div style={{ marginTop: "0.75rem", display: "flex", justifyContent: "space-between",alignItems: "center", gap: "1.5rem", flexWrap: "wrap" }}>
               <Stars value={meta.rating} />
               <span style={{ fontSize: "1rem", color: "#bbb" }}>{meta.user}</span>
             </div>
@@ -106,7 +109,7 @@ export default function AlbumsGrid() {
                   overflow: "hidden",
                 }}
               >
-            <p style={{ margin: 0, color: "#cfcfcf", lineHeight: 1.25, fontSize: "1.1rem" }}>
+            <p style={{ margin: 0, color: "#cfcfcf", lineHeight: 1.25, fontSize: "0.8rem" }}>
                   Lorem ipsum dolor sit amet consectetur. Id volutpat ac tristique auctor eget eu lectus quis orci. Ut netus
                   venenatis fames mauris. Sit ultrices dictumst elit tellus sed. Tristique eget nunc tellus quisque mauris
                   dignissim. Amet faucibus posuere sed tristique id pharetra at. Nisi in volutpat dignissim fermentum massa.
@@ -123,26 +126,13 @@ export default function AlbumsGrid() {
               </div>
 
               {/* Arrow pill that links to Spotify */}
-              <div style={{ marginTop: "1rem" }}>
+              <div style={{ marginTop: "1rem", display: "flex", justifyContent: "flex-end" }}>
                 <a
                   href={album.external_urls.spotify}
                   target="_blank"
                   rel="noreferrer"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "0.5rem",
-                    width: "70px",
-                    height: "34px",
-                    borderRadius: "24px",
-                    border: "1px solid #fff",
-                    textDecoration: "none",
-                    color: "#fff",
-                    fontSize: "1.5rem",
-                  }}
                 >
-                  ➔
+                  <img src={buttonImg} alt="Open on Spotify" />
                 </a>
               </div>
             </div>

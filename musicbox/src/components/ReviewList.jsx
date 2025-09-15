@@ -89,7 +89,6 @@ export default function ReviewsList() {
             gap: "1rem",
             textDecoration: "none",
             color: "inherit",
-            border: "1px solid white",
             borderRadius: "14px",
             padding: "0.4rem",
           }}

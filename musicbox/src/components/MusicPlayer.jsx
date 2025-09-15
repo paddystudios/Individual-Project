@@ -1,6 +1,12 @@
 // src/components/MusicPlayer.jsx
 import { useEffect, useMemo, useRef, useState } from "react";
 import { fetchAlbum } from "../lib/spotify";
+import img1 from "../assets/img1.png";
+import img2 from "../assets/img2.png";
+import img3 from "../assets/img3.png";
+import img4 from "../assets/img4.png";
+import img5 from "../assets/img5.png";
+import img6 from "../assets/img6.png";
 
 /**
  * MusicPlayer
@@ -89,14 +95,7 @@ export default function MusicPlayer() {
   const trackName = firstTrack?.name || "First track";
   const previewUrl = firstTrack?.preview_url || ""; // Some Spotify tracks have null preview_url
 
-  const avatars = [
-    "https://api.dicebear.com/9.x/thumbs/svg?seed=apples",
-    "https://api.dicebear.com/9.x/thumbs/svg?seed=oranges",
-    "https://api.dicebear.com/9.x/thumbs/svg?seed=grapes",
-    "https://api.dicebear.com/9.x/thumbs/svg?seed=bananas",
-    "https://api.dicebear.com/9.x/thumbs/svg?seed=lemons",
-    "https://api.dicebear.com/9.x/thumbs/svg?seed=pears",
-  ];
+  const avatars = [img1, img2, img3, img4, img5, img6];
 
   return (
     <div
@@ -249,15 +248,14 @@ export default function MusicPlayer() {
       {/* Liked By / avatars */}
       <div style={{ marginTop: 26 }}>
         <h4 style={{ margin: 0, fontSize: 20, color: "#ddd" }}>Liked by</h4>
-        <div style={{ display: "flex", gap: 18, alignItems: "center", marginTop: 12, flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: 40, alignItems: "center", marginTop: 12, flexWrap: "wrap" }}>
           {avatars.map((src, i) => (
             <div key={i} style={{ textAlign: "center" }}>
               <img
                 src={src}
                 alt="user avatar"
-                style={{ width: 56, height: 56, borderRadius: 999, border: "1px solid rgba(255,255,255,0.4)" }}
+                style={{ width: 65}}
               />
-              <div style={{ fontSize: 14, letterSpacing: 1, marginTop: 6, color: "#ffd84d" }}>★★★★★</div>
             </div>
           ))}
         </div>

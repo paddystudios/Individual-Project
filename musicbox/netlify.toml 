@@ -1,10 +1,7 @@
-[dev]
-framework = "vite"
-functions = "netlify/functions"
-targetPort = 5173
-port = 8888
+[functions]
+directory = "netlify/functions"
 
-[build]
-command = "vite build"
-publish = "dist"
+[dev]
+command = "vite"
+port = 5173
 functions = "netlify/functions"
