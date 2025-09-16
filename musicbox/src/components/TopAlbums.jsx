@@ -35,7 +35,7 @@ export default function TopAlbums() {
 
   return (
     <section style={{ marginBottom: "2.5rem" }}>
-      <h2 style={{ marginBottom: "0.75rem", fontWeight: 300 }}>Top 4 Albums</h2>
+      <h2 style={{ marginBottom: "0.75rem", marginLeft: "10px", fontWeight: 300 }}>Top 4 Albums</h2>
 
       {err && (
         <div
@@ -73,7 +73,6 @@ export default function TopAlbums() {
                 display: "block",
                 borderRadius: 12,
                 padding: "0.75rem",
-                background: "#111",
                 textDecoration: "none",
                 color: "inherit",
               }}

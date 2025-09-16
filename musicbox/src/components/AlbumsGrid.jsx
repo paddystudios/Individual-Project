@@ -71,7 +71,7 @@ export default function AlbumsGrid() {
             <p style={{ color: "#bbb", margin: 0 }}>
               {album.artists.map((a) => a.name).join(", ")}
             </p>
-            <p style={{ fontSize: "1.75rem", margin: "0 0 0.5rem 0" }}>{album.name}</p>
+            <p style={{ fontSize: "1.40rem", margin: "0 0 0.5rem 0" }}>{album.name}</p>
 
             {/* Cover */}
             <div
@@ -132,7 +132,7 @@ export default function AlbumsGrid() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img src={buttonImg} alt="Open on Spotify" />
+                  <img src={buttonImg} width={65} alt="Open on Spotify" />
                 </a>
               </div>
             </div>

@@ -7,6 +7,7 @@ import img3 from "../assets/img3.png";
 import img4 from "../assets/img4.png";
 import img5 from "../assets/img5.png";
 import img6 from "../assets/img6.png";
+import ButtonImg from "../assets/button.png";
 
 /**
  * MusicPlayer
@@ -161,19 +162,15 @@ export default function MusicPlayer() {
             }}
           >
             Read Reviews
-            <span
+            <img
+              src={ButtonImg}
+              alt="Button"
               style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 44,
-                height: 28,
-                borderRadius: 20,
-                border: "1px solid white",
+                width: 65,
+                marginLeft: 50,
+                
               }}
-            >
-              ➜
-            </span>
+            />
           </a>
         </div>
       </div>
@@ -206,6 +203,10 @@ export default function MusicPlayer() {
               color: "white",
               fontSize: 22,
               cursor: previewUrl ? "pointer" : "not-allowed",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginLeft: "16px",
             }}
           >
             {isPlaying ? "❚❚" : "►"}

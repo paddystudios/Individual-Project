@@ -10,7 +10,7 @@ export default function ProfileHeader() {
           flexDirection: "column",
           alignItems: "center",
           textAlign: "center",
-          gap: "1rem",
+          gap: "0.1rem",
         }}
       >
         <img

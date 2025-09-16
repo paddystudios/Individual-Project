@@ -4,6 +4,7 @@ import Reviews from "./pages/Reviews";
 import Playlists from "./pages/Playlists"; 
 import Profile from "./pages/Profile";
 import Logo from "./assets/BOPPDLOGO.svg";
+import ProfilePic from "./assets/profilepic.png";
 
 function App() {
   return (
@@ -50,9 +51,20 @@ function App() {
             </Link>
             <Link
               to="/profile"
-              style={{ fontWeight: 700, textTransform: "uppercase" }}
+              style={{
+                fontWeight: 700,
+                textTransform: "uppercase",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.5rem",
+              }}
             >
               Profile
+              <img
+                src={ProfilePic}
+                alt="Profile"
+                style={{ width: "24px", height: "24px", borderRadius: "50%" }}
+              />
             </Link>
           </nav>
         </div>

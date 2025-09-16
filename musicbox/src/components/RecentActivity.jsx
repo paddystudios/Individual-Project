@@ -6,7 +6,7 @@ import Stars from "./Stars";
 // 4 recent things (change freely)
 const recentQueries = [
   { q: "album:Starboy artist:The Weeknd" },
-  { q: "album:More Life artist:Drake" },
+  { q: "album:Views artist:Drake" },
   { q: "album:Un Verano Sin Ti artist:Bad Bunny" },
   { q: "album:Full Moon artist:Brandy" },
 ];
@@ -42,7 +42,7 @@ export default function RecentActivity() {
 
   return (
     <section style={{ marginBottom: "2.5rem" }}>
-      <h2 style={{ marginBottom: "0.75rem", fontWeight: 300 }}>Recent Activities</h2>
+      <h2 style={{ marginBottom: "0.75rem", marginLeft: "10px", fontWeight: 300 }}>Recent Activities</h2>
 
       {err && (
         <div
@@ -74,7 +74,6 @@ export default function RecentActivity() {
               style={{
                 borderRadius: 12,
                 padding: "0.75rem",
-                background: "#111",
                 textAlign: "center",
               }}
             >
