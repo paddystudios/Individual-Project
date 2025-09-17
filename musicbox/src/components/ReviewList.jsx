@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchAlbum } from "../lib/spotify";
-import { GridSkeleton } from "./Skeletons";
+import { ReviewSkeleton } from "./Skeletons";
+import { motion } from "framer-motion";
 
 const FALLBACK_COVER = "https://placehold.co/160x160?text=Album";
 const COVER_SIZE = 180; // Keep the image square and keep the grid column in sync
@@ -36,6 +37,20 @@ const REVIEW_ITEMS = [
       "Bubbly, nostalgic, and tight. Short tracks that stick in your head.",
   },
 ];
+
+const listVariants = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { when: "beforeChildren", staggerChildren: 0.06 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 500, damping: 28 } },
+};
 
 function Stars({ value = 0 }) {
   const s = "★".repeat(value) + "☆".repeat(5 - value);
@@ -76,16 +91,17 @@ export default function ReviewsList() {
   if (loading) {
     return (
       <div style={{ margin: "1rem 0" }}>
-        <GridSkeleton cols={2} count={REVIEW_ITEMS.length} />
+        <ReviewSkeleton count={REVIEW_ITEMS.length} />
       </div>
     );
   }
   if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
 
   return (
-    <div style={{ display: "grid", gap: "1.25rem" }}>
+    <motion.div variants={listVariants} initial="hidden" animate="show" style={{ display: "grid", gap: "1.25rem" }}>
       {items.map(({ album, user, rating, text }) => (
-        <a
+        <motion.a
+          variants={itemVariants}
           key={album.id}
           href={album.external_urls?.spotify}
           target="_blank"
@@ -160,8 +176,8 @@ export default function ReviewsList() {
               {text}
             </p>
           </div>
-        </a>
+        </motion.a>
       ))}
-    </div>
+    </motion.div>
   );
 }

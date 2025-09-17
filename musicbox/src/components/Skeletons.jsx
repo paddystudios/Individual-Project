@@ -80,3 +80,41 @@ export function GridSkeleton({ cols = 4, count = 8 }) {
     </div>
   );
 }
+
+export function ReviewSkeleton({ count = 3 }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      <SkeletonStyles />
+      {Array.from({ length: count }).map((_, i) => (
+        <div
+          key={i}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 16,
+            padding: 16,
+            borderRadius: 12,
+            border: "1px solid #232323",
+          }}
+        >
+          <div
+            className="skel"
+            style={{
+              width: 84,
+              height: 84,
+              borderRadius: 8,
+              flex: "0 0 auto",
+            }}
+          />
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8 }}>
+            <div className="skel" style={{ height: 14, width: "28%" }} />
+            <div className="skel" style={{ height: 20, width: "42%", borderRadius: 6 }} />
+            <div className="skel" style={{ height: 12, width: "18%" }} />
+            <div className="skel" style={{ height: 12, width: "85%" }} />
+            <div className="skel" style={{ height: 12, width: "65%" }} />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}

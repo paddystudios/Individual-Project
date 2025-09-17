@@ -22,7 +22,7 @@ export default function Home() {
       <BackgroundHero />
         <HeroSection />
       </div>
-      <h2 style={{ fontSize: "30px", fontWeight: 400, marginBottom: "20px" }}> New from friends</h2>
+      <h2 style={{ fontSize: "30px", fontWeight: 200}}> New from friends</h2>
       <AlbumsGrid />
       <PopularSection />
       <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>

@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
 
 /** Mini album DB for search – add/remove as you like */
 const SUGGESTED_ALBUMS = [
@@ -32,6 +33,22 @@ const SUGGESTED_ALBUMS = [
   },
 ];
 
+const springFast = { type: "spring", stiffness: 500, damping: 28 };
+
+const listVariants = {
+  hidden: { opacity: 0, y: 30 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { ...springFast, staggerChildren: 0.06, delayChildren: 0.05 }
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: springFast },
+};
+
 function AddReviewForm({ onAdd, onClose }) {
   const [lookup, setLookup] = useState("");
   const [chosen, setChosen] = useState(null);
@@ -50,7 +67,9 @@ function AddReviewForm({ onAdd, onClose }) {
   const canSubmit = chosen && user.trim() && text.trim();
 
   return (
-    <div style={{ border: "1px solid #fff", borderRadius: 12, padding: "1rem", background: "#0c0c0c" }}>
+    <div
+      style={{ border: "1px solid #fff", borderRadius: 12, padding: "1rem", background: "#0c0c0c" }}
+    >
       <h2 style={{ margin: 0, marginBottom: 12 }}>Add review</h2>
 
       <label style={{ display: "block", fontSize: 14, color: "#bbb" }}>Search album</label>
@@ -64,24 +83,39 @@ function AddReviewForm({ onAdd, onClose }) {
         }}
       />
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(170px, 1fr))", gap: 12, marginBottom: 12 }}>
+      <motion.div
+        variants={listVariants}
+        initial="hidden"
+        animate="show"
+        style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 12 }}
+      >
         {results.map((a) => (
-          <button
+          <motion.button
             key={a.id}
+            variants={itemVariants}
             onClick={() => setChosen(a)}
             style={{
               textAlign: "left",
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              width: "100%",
               borderRadius: 10,
               border: chosen?.id === a.id ? "2px solid #FFD027" : "1px solid #333",
-              padding: 8, background: "#121212", cursor: "pointer", color: "#fff",
+              padding: 8,
+              background: "#121212",
+              cursor: "pointer",
+              color: "#fff",
             }}
           >
-            <img src={a.image} alt="" style={{ width: "100%", aspectRatio: "1/1", objectFit: "cover", borderRadius: 6 }} />
-            <div style={{ marginTop: 8, fontWeight: 500 }}>{a.title}</div>
-            <div style={{ color: "#aaa", fontSize: 13 }}>{a.artist}</div>
-          </button>
+            <img src={a.image} alt="" style={{ width: 64, height: 64, objectFit: "cover", borderRadius: 6 }} />
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div style={{ fontWeight: 500, lineHeight: 1.2 }}>{a.title}</div>
+              <div style={{ color: "#aaa", fontSize: 13 }}>{a.artist}</div>
+            </div>
+          </motion.button>
         ))}
-      </div>
+      </motion.div>
 
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
         <span style={{ color: "#bbb", fontSize: 14 }}>Your rating:</span>
@@ -143,7 +177,9 @@ export default function ReviewsSearchAdd({ onSearch, onAdd }) {
 
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+      <div
+        style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}
+      >
         <h1 style={{ margin: 0 }}>Reviews</h1>
         <div style={{ display: "flex", gap: 10 }}>
           <input
