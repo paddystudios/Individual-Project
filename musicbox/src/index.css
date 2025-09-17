@@ -94,3 +94,25 @@ video {
     background-color: #f9f9f9;
   }
 }
+
+
+.album-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+a {
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+a:hover {
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }

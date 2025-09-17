@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchAlbum } from "../lib/spotify";
+import { GridSkeleton } from "./Skeletons";
 
 const FALLBACK_COVER = "https://placehold.co/160x160?text=Album";
 const COVER_SIZE = 180; // Keep the image square and keep the grid column in sync
@@ -72,7 +73,13 @@ export default function ReviewsList() {
     };
   }, []);
 
-  if (loading) return <p>Loading reviews…</p>;
+  if (loading) {
+    return (
+      <div style={{ margin: "1rem 0" }}>
+        <GridSkeleton cols={2} count={REVIEW_ITEMS.length} />
+      </div>
+    );
+  }
   if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
 
   return (

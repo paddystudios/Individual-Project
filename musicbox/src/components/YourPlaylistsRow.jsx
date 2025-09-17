@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { searchPlaylists } from "../lib/spotify";
+import { RowSkeleton } from "./Skeletons";
 
 // Curated popular playlists
 const yourQueries = [
@@ -18,7 +19,7 @@ const yourQueries = [
 ];
 
 export default function YourPlaylistsRow() {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -32,6 +33,15 @@ export default function YourPlaylistsRow() {
       }
     })();
   }, []);
+
+  if (!items) {
+    return (
+      <section style={{ marginBottom: "2.5rem" }}>
+        <h2 style={{ marginBottom: "0.75rem", fontWeight: 300 }}>Your Playlists</h2>
+        <RowSkeleton items={yourQueries.length} itemWidth={220} />
+      </section>
+    );
+  }
 
   return (
     <section style={{ marginBottom: "2.5rem" }}>

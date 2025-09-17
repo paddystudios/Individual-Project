@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 export default function ReviewSearchBar() {
     return (
       <div
@@ -8,7 +9,7 @@ export default function ReviewSearchBar() {
           marginBottom: "1rem",
         }}
       >
-        <input
+        <motion.input
           placeholder="Search albums…"
           style={{
             flex: 1,
@@ -19,8 +20,10 @@ export default function ReviewSearchBar() {
             outline: "none",
             background: "black",
           }}
+          whileFocus={{ scale: 1.02, boxShadow: "0 0 12px rgba(255,255,255,0.5)" }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
         />
-        <button
+        <motion.button
           type="button"
           style={{
             padding: "0.75rem 1rem",
@@ -32,10 +35,13 @@ export default function ReviewSearchBar() {
             textTransform: "uppercase",
             letterSpacing: "0.04em",
           }}
+          whileHover={{ scale: 1.05, backgroundColor: "#111" }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
           onClick={() => alert("Open add review flow (placeholder)")}
         >
           + Add Review
-        </button>
+        </motion.button>
       </div>
     );
   }

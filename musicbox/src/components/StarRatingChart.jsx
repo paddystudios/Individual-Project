@@ -1,5 +1,5 @@
 // src/components/StarRatingChart.jsx
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { fetchAlbum } from "../lib/spotify";
 
 // 4 recent things (change freely)
@@ -16,9 +16,43 @@ function seededRating(seedIndex) {
   return pool[seedIndex % pool.length];
 }
 
+const RatingBarStyles = () => (
+  <style>{`
+    @keyframes growBar {
+      from { width: 0; }
+      to { width: var(--target-width); }
+    }
+    .rating-bar {
+      --target-width: 100%;
+      animation: growBar 1s ease-out forwards;
+    }
+  `}</style>
+);
+
 export default function StarRatingChart({ count = 40, barColor = "yellow" }) {
   const [albums, setAlbums] = useState(null);
   const [err, setErr] = useState("");
+
+  const chartRef = useRef(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setInView(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    if (chartRef.current) {
+      observer.observe(chartRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     let alive = true;
@@ -52,7 +86,8 @@ export default function StarRatingChart({ count = 40, barColor = "yellow" }) {
   const topStar = (Object.entries(dist).sort((a, b) => b[1] - a[1])[0] || [4])[0];
 
   return (
-    <section style={{ marginBottom: "2.5rem" }}>
+    <section ref={chartRef} style={{ marginBottom: "2.5rem" }}>
+      <RatingBarStyles />
       <h3 style={{ marginBottom: "0.5rem", marginLeft: "10px", fontWeight: 300 }}>
         Rating distribution
       </h3>
@@ -92,11 +127,13 @@ export default function StarRatingChart({ count = 40, barColor = "yellow" }) {
                   }}
                 >
                   <div
+                    className={inView ? "rating-bar" : ""}
                     style={{
                       position: "absolute",
                       inset: 0,
-                      width: `${widthPct}%`,
                       background: barColor,
+                      "--target-width": `${widthPct}%`,
+                      width: 0,
                     }}
                   />
                 </div>

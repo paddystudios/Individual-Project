@@ -1,20 +1,21 @@
 // src/components/SavedPlaylistsRow.jsx
 import { useEffect, useState } from "react";
 import { searchPlaylists } from "../lib/spotify";
+import { RowSkeleton } from "./Skeletons";
 
 export default function SavedPlaylistsRow() {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(null);
   const [error, setError] = useState(null);
 
   // Pretend “saved” by curating a few popular playlist searches,
   // then merge + de-dupe the results.
   const queries = [
-    "RapCaviar",
     "Chill Hits",
     "Songs to Sing in the Car",
     "Lo-Fi Beats",
     "Indie Mix",
     "Mood Booster",
+    "RapCaviar",
   ];
 
   useEffect(() => {
@@ -41,6 +42,15 @@ export default function SavedPlaylistsRow() {
       }
     })();
   }, []);
+
+  if (!items && !error) {
+    return (
+      <section style={{ marginBottom: "2.5rem" }}>
+        <h2 style={{ marginBottom: "0.75rem", fontWeight: 300 }}>Saved Playlists</h2>
+        <RowSkeleton items={queries.length * 3} itemWidth={220} />
+      </section>
+    );
+  }
 
   return (
     <section style={{ marginBottom: "2.5rem" }}>

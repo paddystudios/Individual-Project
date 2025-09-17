@@ -5,6 +5,9 @@ import AlbumsGrid from "../components/AlbumsGrid";
 import PopularSection from "../components/PopularSection";
 import ForYouGrid from "../components/ForYouGrid";
 import MusicPlayer from "../components/MusicPlayer";
+import HeroSection from "../components/HeroSection";
+import BackgroundHero from "../components/BackgroundHero";
+
 
 export default function Home() {
   return (
@@ -15,7 +18,11 @@ export default function Home() {
       marginRight: "auto", 
       maxWidth: "1400px" 
     }}>
-      <h2 style={{ marginBottom: "0.2rem" }}> NEW FROM FRIENDS</h2>
+      <div style={{ position: "relative", overflow: "hidden" }}>
+      <BackgroundHero />
+        <HeroSection />
+      </div>
+      <h2 style={{ fontSize: "30px", fontWeight: 400, marginBottom: "20px" }}> New from friends</h2>
       <AlbumsGrid />
       <PopularSection />
       <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>

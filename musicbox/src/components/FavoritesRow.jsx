@@ -1,6 +1,7 @@
 // src/components/FavoritesRow.jsx
 import { useEffect, useState } from "react";
 import { fetchAlbum } from "../lib/spotify";
+import { RowSkeleton } from "./Skeletons";
 
 // Your favorites (expandable)
 const favQueries = [
@@ -51,43 +52,47 @@ export default function FavoritesRow() {
     );
   }
 
+  if (!items) {
+    return (
+      <section style={{ marginBottom: "2.5rem" }}>
+        <h2 style={{ marginBottom: "0.75rem", fontWeight: 300 }}>Favorites</h2>
+        <RowSkeleton items={favQueries.length} itemWidth={220} />
+      </section>
+    );
+  }
+
   return (
     <section style={{ marginBottom: "2.5rem" }}>
       <h2 style={{ marginBottom: "0.75rem", fontWeight: 300 }}>Favorites</h2>
-
       <div
         style={{
           display: "flex",
-          gap: "8px",                // smaller gap
+          gap: "8px",
           overflowX: "auto",
           paddingBottom: "0.5rem",
           scrollbarWidth: "thin",
         }}
       >
-        {(items || Array.from({ length: 8 })).map((album, i) => {
-          const isLoading = !album;
+        {items.map((album) => {
           const href = album?.external_urls?.spotify || "#";
           const img = album?.images?.[0]?.url;
 
           return (
             <a
-              key={album?.id || `skeleton-${i}`}
+              key={album.id}
               href={href}
               target="_blank"
               rel="noreferrer"
-              style={{ display: "block", minWidth: 220 }}  // ~5 across with smaller gap
+              style={{ display: "block", minWidth: 220 }}
               title={album?.name || ""}
-              onClick={(e) => { if (isLoading || href === "#") e.preventDefault(); }}
             >
               <div
                 style={{
                   width: 220,
-                  height: 220,                      // perfect square covers
+                  height: 220,
                   borderRadius: 12,
                   border: "1px solid rgba(255,255,255,0.2)",
-                  background: isLoading
-                    ? "linear-gradient(90deg, #222 25%, #2a2a2a 37%, #222 63%)"
-                    : `center/cover no-repeat url(${img})`,
+                  background: `center/cover no-repeat url(${img})`,
                 }}
               />
             </a>
