@@ -138,7 +138,7 @@ export default function AlbumsGrid() {
     (async () => {
       try {
         const data = await Promise.all(albumQueries.map((query) => fetchAlbum(query)));
-        setAlbums(data);
+        setAlbums(data.filter(Boolean));
       } catch (e) {
         setError(e.message);
       }
@@ -160,7 +160,11 @@ export default function AlbumsGrid() {
       {albums.map((album, idx) => {
         const meta = MOCK_META[idx] ?? { user: "@user", rating: 5 };
         return (
-          <AlbumCard album={album} meta={meta} />
+          <AlbumCard
+            key={album?.id ?? `${album?.name ?? 'album'}-${idx}`}
+            album={album}
+            meta={meta}
+          />
         );
       })}
     </div>

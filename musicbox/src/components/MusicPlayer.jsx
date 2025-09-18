@@ -106,7 +106,7 @@ export default function MusicPlayer() {
         color: "white",
       }}
     >
-      <h1 style={{ fontSize: 30, fontWeight: 400, marginBottom: 20 }}>New Music</h1>
+      <h1 style={{ paddingTop: 20, fontSize: 30, fontWeight: 400, marginBottom: 20 }}>New Music</h1>
 
       <div
         style={{
@@ -198,23 +198,22 @@ export default function MusicPlayer() {
               width: 56,
               height: 56,
               borderRadius: 28,
-              border: "none",
-              background: "#222",
+              border: "1px solid white",
+              background: "black",
               color: "white",
               fontSize: 22,
               cursor: previewUrl ? "pointer" : "not-allowed",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              marginLeft: "16px",
             }}
           >
-            {isPlaying ? "❚❚" : "►"}
+            <span style={{ marginLeft: "5px" }}>{isPlaying ? "❚❚" : "►"}</span>
           </button>
 
           {/* progress */}
           <div style={{ flex: 1 }}>
-            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, color: "#aaa" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, color: "white" }}>
               <span>{fmt(currentTime)}</span>
               <span>{duration ? fmt(duration) : "--:--"}</span>
             </div>

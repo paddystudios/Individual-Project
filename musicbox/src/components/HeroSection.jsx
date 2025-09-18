@@ -3,6 +3,7 @@ import buttonImg from "../assets/button.png";
 import { useEffect, useState, useRef } from "react";
 import BackgroundHero from "./BackgroundHero";
 import thunderFont from "../assets/Thunder-BlackLC.otf";
+import MusicPlayerMini from "./MusicPlayerMini";
 import { fetchAlbum } from "../lib/spotify";
 
 function TypingHeading({ text, className, style }) {
@@ -49,35 +50,33 @@ function TypingHeading({ text, className, style }) {
 }
 
 export default function HeroSection() {
-  const [ppCover, setPPCover] = useState(null);
-  const [ppAlt, setPPAlt] = useState("Illegal — PinkPantheress (cover)");
-  useEffect(() => {
-    let alive = true;
-    (async () => {
-      try {
-        const album = await fetchAlbum("album:Fancy That artist:PinkPantheress");
-        if (!alive) return;
-        const src = album?.images?.[0]?.url || album?.images?.[1]?.url || null;
-        setPPCover(src);
-        setPPAlt(`${album?.name || "Fancy That"} — ${album?.artists?.[0]?.name || "PinkPantheress"} (cover)`);
-      } catch (e) {
-        // leave fallback
-      }
-    })();
-    return () => { alive = false; };
-  }, []);
-
   const titleRef = useRef(null);
-  const [eqWidth, setEqWidth] = useState(null);
+  const [coverSrc, setCoverSrc] = useState(null);
+
   useEffect(() => {
     const update = () => {
       if (titleRef.current) {
-        setEqWidth(titleRef.current.offsetWidth);
+        // This was used for eqWidth, now removed
       }
     };
     update();
     window.addEventListener('resize', update);
     return () => window.removeEventListener('resize', update);
+  }, []);
+
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        const album = await fetchAlbum({ q: "album:Fancy That artist:PinkPantheress" });
+        const img = album?.images?.[0]?.url || album?.album?.images?.[0]?.url; // support both shapes
+        if (alive) setCoverSrc(img || null);
+      } catch (e) {
+        console.error("cover fetch failed", e);
+        if (alive) setCoverSrc(null);
+      }
+    })();
+    return () => { alive = false; };
   }, []);
 
   return (
@@ -132,30 +131,6 @@ export default function HeroSection() {
           -webkit-background-clip: text; background-clip: text; color: transparent;
         }
         .cta:hover { transform: translateY(-2px) scale(1.03); }
-        .eq {
-          display: flex;
-          align-items: flex-end;
-          justify-content: space-between;
-          width: 100%;
-          height: 14px;
-        }
-        .eq > span {
-          flex: 1;
-          margin: 0 2px;
-          border-radius: 2px;
-          background: #FFE600;
-          opacity: .95;
-          transform-origin: bottom;
-          animation: eq-bounce 1s ease-in-out infinite;
-        }
-        .eq > span:nth-child(2){ animation-delay: .08s }
-        .eq > span:nth-child(3){ animation-delay: .16s }
-        .eq > span:nth-child(4){ animation-delay: .24s }
-        .eq > span:nth-child(5){ animation-delay: .32s }
-        @keyframes eq-bounce {
-          0%,100% { transform: scaleY(0.3); }
-          50% { transform: scaleY(1); }
-        }
 
         /* scroll cue */
         .scroll-cue {
@@ -172,7 +147,6 @@ export default function HeroSection() {
         @keyframes cue-float { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-6px); } }
 
         @media (prefers-reduced-motion: reduce) {
-          .eq > span{ animation: none; }
           .scroll-cue{ animation: none; }
         }
       `}</style>
@@ -220,42 +194,11 @@ export default function HeroSection() {
       </motion.div>
 
       <div style={{ position: "absolute", top: 20, right: 20 }}>
-        <motion.div
-          initial={{ opacity: 0, x: 16 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.18, duration: 0.35 }}
-          style={{
-            display: "flex", flexDirection: "column", alignItems: "center",
-            padding: "0.75rem 1rem", borderRadius: 12, background: "rgba(0,0,0,0.35)",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            {/* cover with fallback */}
-            <div style={{ position: "relative", width: 48, height: 48, borderRadius: 8, overflow: "hidden", flex: "0 0 auto", border: "1px solid rgba(255,255,255,0.2)" }}>
-              <img
-                src={ppCover || "https://via.placeholder.com/96x96.png?text=%E2%99%AA"}
-                alt={ppAlt}
-                width={48}
-                height={48}
-                referrerPolicy="no-referrer"
-                loading="eager"
-                decoding="async"
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                onError={(e) => { e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Crect width='100%25' height='100%25' fill='%23111111'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' fill='%23FFE600' font-size='18' font-family='sans-serif'%3EFancy That%3C/text%3E%3C/svg%3E"; }}
-              />
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 4, minWidth: 0 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 0 }}>
-                <strong ref={titleRef} style={{ color: "#fff", fontSize: 13, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>Illegal</strong>
-                <span style={{ color: "#9a9a9a", fontSize: 12 }}>&middot;</span>
-                <span style={{ color: "#d6d6d6", fontSize: 13, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>PinkPantheress</span>
-              </div>
-              <div className="eq" aria-label="Now playing visualizer" style={{ width: eqWidth ? eqWidth : '100%' }}>
-                <span></span><span></span><span></span><span></span><span></span>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        <MusicPlayerMini
+          title="Illegal"
+          artist="PinkPantheress"
+          coverSrc={coverSrc}
+        />
       </div>
 
       {/* Scroll cue */}

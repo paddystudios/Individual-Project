@@ -10,12 +10,18 @@ export default function SavedPlaylistsRow() {
   // Pretend “saved” by curating a few popular playlist searches,
   // then merge + de-dupe the results.
   const queries = [
-    "Chill Hits",
-    "Songs to Sing in the Car",
-    "Lo-Fi Beats",
-    "Indie Mix",
-    "Mood Booster",
+    "Today's Top Hits",
     "RapCaviar",
+    "Viva Latino",
+    "mint",
+    "New Music Friday",
+    "Rock Classics",
+    "Peaceful Piano",
+    "lofi beats",
+    "Beast Mode",
+    "Songs to Sing in the Car",
+    "Mood Booster",
+    "All Out 2010s",
   ];
 
   useEffect(() => {

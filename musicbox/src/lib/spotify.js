@@ -1,13 +1,21 @@
 const base = "/.netlify/functions/spotify-album";
 
 export async function fetchAlbum(input) {
-  // input can be an id ("3SpBlx...") OR an object { q: "album:... artist:..." }
-  const qs =
-    typeof input === "string"
-      ? `?id=${encodeURIComponent(input)}`
-      : input?.q
-      ? `?q=${encodeURIComponent(input.q)}`
-      : "";
+  let qs = "";
+
+  if (typeof input === "string") {
+    if (input.startsWith("album:")) {
+      // Treat as a search query (e.g., "album:... artist:...")
+      qs = `?q=${encodeURIComponent(input)}`;
+    } else {
+      // Treat as a direct album ID
+      qs = `?id=${encodeURIComponent(input)}`;
+    }
+  } else if (input?.q) {
+    qs = `?q=${encodeURIComponent(input.q)}`;
+  } else if (input?.id) {
+    qs = `?id=${encodeURIComponent(input.id)}`;
+  }
 
   const res = await fetch(`${base}${qs}`);
   if (!res.ok) {
