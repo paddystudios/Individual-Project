@@ -1,10 +1,13 @@
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
+import { BrowserRouter, HashRouter, Routes, Route, Link, useLocation } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Logo from "./assets/BOPPDLOGO.svg";
 import ProfilePic from "./assets/profilepic.png";
 import { GridSkeleton } from "./components/Skeletons";
 
+
+// Hash routing allows GitHub Pages to serve every route from index.html.
+const Router = import.meta.env.BASE_URL === "/" ? BrowserRouter : HashRouter;
 
 // --- Lazy load pages for route-level code splitting ---
 const Home = lazy(() => import("./pages/Home"));
